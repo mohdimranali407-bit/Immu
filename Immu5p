@@ -1,0 +1,110 @@
+java
+CopyEdit
+class LeftistNode {
+ int key;
+ int dist; // Null path length
+ LeftistNode left, right;
+ LeftistNode(int key) {
+ this.key = key;
+ this.dist = 0;
+ this.left = this.right = null;
+ }
+}
+class LeftistTree {
+ private LeftistNode root;
+ // Merge two trees
+ private LeftistNode merge(LeftistNode h1, LeftistNode h2) {
+ if (h1 == null) return h2;
+ if (h2 == null) return h1;
+ if (h1.key > h2.key) {
+ LeftistNode temp = h1;
+ h1 = h2;
+ h2 = temp;
+ }
+ h1.right = merge(h1.right, h2);
+ if (h1.left == null || h1.left.dist < h1.right.dist) {
+ LeftistNode temp = h1.left;
+ h1.left = h1.right;
+ h1.right = temp;
+ }
+ h1.dist = (h1.right == null ? 0 : h1.right.dist) + 1;
+ return h1;
+ }
+ // Insert an element
+ public void insert(int key) {
+ LeftistNode newNode = new LeftistNode(key);
+ root = merge(root, newNode);
+ }
+ // Delete the minimum element (root)
+ public void deleteMin() {
+ if (root == null) {
+ System.out.println("Tree is empty.");
+ return;
+ }
+ System.out.println("Deleting minimum element: " + root.key);
+ root = merge(root.left, root.right);
+ }
+ // Search for an element
+ public boolean search(int key) {
+ return searchRec(root, key);
+ }
+ private boolean searchRec(LeftistNode node, int key) {
+ if (node == null) return false;
+ if (node.key == key) return true;
+ return searchRec(node.left, key) || searchRec(node.right, key);
+ }
+ // In-order traversal
+ public void inorder() {
+ inorderRec(root);
+ System.out.println();
+ }
+ private void inorderRec(LeftistNode node) {
+ if (node != null) {
+ inorderRec(node.left);
+ System.out.print(node.key + " ");
+ inorderRec(node.right);
+ }
+ }
+}
+public class LeftistTreeDemo {
+ public static void main(String[] args) {
+ LeftistTree tree = new LeftistTree();
+ // Insert elements
+ tree.insert(10);
+ tree.insert(20);
+ tree.insert(5);
+ tree.insert(15);
+ System.out.println("In-order traversal of the tree:");
+ tree.inorder();
+ // Search for an element
+ System.out.println("Searching for 15: " + (tree.search(15) ? "Found" : "Not 
+Found"));
+ System.out.println("Searching for 25: " + (tree.search(25) ? "Found" : "Not 
+Found"));
+ // Delete the minimum element
+ tree.deleteMin();
+ System.out.println("In-order traversal after deleting minimum:");
+ tree.inorder();
+ }
+}
+
+
+In-order traversal of the tree:
+5 10 15 20
+Searching for 15: Found
+Searching for 25: Not Found
+Deleting minimum element: 5
+In-order traversal after deleting minimum:
+10 15 20
+
+
+Dictionary contents: 
+apple : A fruit that is sweet and crispy. 
+banana : A yellow fruit that is soft. 
+cherry : A small red fruit that is sweet. 
+Searching for 'banana': A yellow fruit that is soft. 
+Searching for 'grape': null 
+Deleting 'banana'... 
+Dictionary contents after deletion: 
+apple : A fruit that is sweet and crispy. 
+cherry : A small red fruit that is sweet
