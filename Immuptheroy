@@ -1,0 +1,75 @@
+5th
+Aim:
+To perform the following operations on a Leftist Tree:
+a) Insert an element
+b) Delete an element
+c) Search for a key element
+Objectives:
+1. Understand the concept and structure of a Leftist Tree.
+2. Implement the operations: insertion, deletion, and search.
+3. Analyze how a Leftist Tree maintains its properties using skew heap operations.
+Equipment/Software Requirements:
+ Java Development Kit (JDK)
+ Integrated Development Environment (IDE) such as IntelliJ IDEA or Eclipse
+Theory:
+A Leftist Tree is a binary tree that maintains two properties:
+1. Heap property: Every node is smaller (or larger in case of a max-heap) than its children.
+2. Leftist property: The shortest path to a null node is always on the right child.
+This structure ensures that insertions and deletions are efficient, with an amortized time complexity of 
+O(log⁡n)O(\log n)O(logn).
+Algorithm:
+Insertion:
+1. Create a new node for the key.
+2. Merge the new node with the existing Leftist Tree.
+Merge Operation:
+1. Recursively merge the two trees.
+2. Ensure the leftist property by swapping children if necessary.
+Deletion:
+1. Remove the root node.
+2. Merge the left and right subtrees to maintain the Leftist Tree.
+Search:
+1. Perform a standard binary tree search for the key.
+
+
+9th
+Aim
+To implement a dictionary data structure using hashing that supports the following operations:
+a) Insert a key-value pair.
+b) Delete a key-value pair.
+c) Search for a key.
+d) Display all key-value pairs.
+Introduction
+Hashing is a technique used to uniquely identify a particular object from a group of similar objects. In this 
+case, we will implement a dictionary, which maps keys to values, using a hash table to store the entries. 
+Each key will be mapped to a value, and we will use a hashing function to convert the key into an index in 
+the hash table.
+Hash Table Operations
+1. Insert:
+We will insert a key-value pair into the hash table using the hashing function to find an index for 
+the key. If the index is already occupied (collision), we will resolve the collision by using linear 
+probing.
+2. Delete:
+To delete a key-value pair, we will hash the key to find the appropriate index and then remove the 
+key-value pair. If the key is not found, we will display an error message.
+3. Search:
+To search for a key, we will hash the key and check if the corresponding index in the hash table 
+contains the key. If found, return the associated value; otherwise, indicate that the key is not in the 
+dictionary.
+4. Display:
+Display all key-value pairs stored in the hash table.
+Algorithm
+1. Insert:
+o Compute the hash index for the key using a hashing function.
+o If the slot at the computed index is empty, store the key-value pair there.
+o If the slot is occupied, resolve the collision using linear probing (i.e., check the next slot 
+and so on).
+2. Delete:
+o Compute the hash index for the key.
+o If the key is found, remove the key-value pair and shift the subsequent entries as necessary.
+o If the key is not found, display an error message.
+3. Search:
+o Compute the hash index for the key.
+o If the key exists at the computed index, return the value. Otherwise, continue probing to 
+find the key.
+4. Display:
+o Traverse through the hash table and print all key-value pairs.
